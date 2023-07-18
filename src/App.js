@@ -1,24 +1,37 @@
 import logo from './logo.svg';
 import './App.css';
+import Home from './nottodo/Home';
+import Outline from './nottodo/Outline';
+import {
+  createBrowserRouter,
+  Navigate,
+  RouterProvider,
+} from "react-router-dom";
+import Login from './Login';
+import React, { useContext } from 'react';
+import User, { UserContext } from './Context';
+import Context from './Context';
+
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <Navigate to="/login" />
+  },
+  {
+    path: '/home',
+    element: <Outline />
+  },
+  {
+    path: '/login',
+    element: <Login />,
+  }
+]);
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Context>
+      <RouterProvider router={router} />
+    </Context>
   );
 }
 
